@@ -1,10 +1,6 @@
 import styled from "styled-components";
 
 //Navigation Bar styles
-export const Container = styled.div`
-
-`;
-
 export const NavBarContainer = styled.div`
   width: 10%;
   height: 92vh;
@@ -37,7 +33,7 @@ export const InfinityScrollContainer = styled.div`
 export const RecruitmentRequest = styled.div`
   font-size: 20px;
   padding: 6vh 0; 
-  margin-left: 300px;
+  margin-left: 252px;
   font-weight: 100;
 `;
 
@@ -47,9 +43,22 @@ export const Post = styled.div`
   background-color: #ffffff;
   border: 1px solid #e7e7e7;
   text-align: center;
-  float: right;
+  float: left;
   margin: 20px 30px;
-  box-shadow: 10px 5px 5px #e7e7e7e7;
+  box-shadow: 5px 5px 5px #e7e7e7e7;  
+`;
+
+export const PostContainer = styled.div`
+  display: inline-block;
+  margin-left: 220px;
+`;
+
+
+export const CompanyName = styled.div`
+  font-size: 25px;
+  display:flex;
+  flex-direction: column;
+  margin: 100px 30px 30px 30px;
 `;
 
 
