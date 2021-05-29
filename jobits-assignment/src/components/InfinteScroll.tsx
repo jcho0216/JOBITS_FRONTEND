@@ -1,50 +1,52 @@
-import { JSXElement } from "@babel/types";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import * as S from "./styles";
 
-interface DataType {
-  name: string;
-  page: number;
-  createdAt: string;
-}
-
 const InfiniteScroll = (): JSX.Element => {
-  const [data, setData] = useState<DataType[]>([]);
-  const [page, setPage] = useState<number>(1);
-//   const [loading, setLoading] = useState<boolean>(false);
+  const [data, setData] = useState<string[]>([]);
+  let [page, setPage] = useState<number>(1);
+  const [maxPage, setMaxPage] = useState<number>(0);
 
-  const getData = async (page: number) => {
-    console.log(page);
-    const jobData = await axios.get(
-      `http://52.78.60.221:8000/scroll?page=${page}`
-    );
-    // setLoading(true);
-    setData(jobData.data.data);
+  window.onscroll = () => {
+    const scrollHeight = document.documentElement.scrollHeight;
+    const scrollTop = document.documentElement.scrollTop;
+    const clientHeight = document.documentElement.clientHeight;
+
+    if (scrollTop + clientHeight >= scrollHeight) {
+      if (page > maxPage) {
+        console.log("데이터가 없어요 ㅠ");
+      } else {
+        setPage((page += 1));
+      }
+    }
   };
 
   useEffect(() => {
+    const getData = async (page: number) => {
+      const jobData = await axios.get(
+        `${process.env.REACT_APP_API_URL}/scroll?page=${page}`
+      );
+      setData([...data, ...jobData.data.data]);
+      setMaxPage(jobData.data.maxPage);
+    };
     getData(page);
-    // setLoading(false);
-  }, []);
+  }, [page]);
 
-//   if (loading != true) return <h1>Loading...</h1>;
-  
-    return (
-      <S.InfinityScrollContainer>
-        <S.RecruitmentRequest>채용의뢰</S.RecruitmentRequest>
-        <S.PostContainer>
-          {data.map((data: any) => {
-            return (
-              <S.Post>
-                <S.CompanyName>{data.name}</S.CompanyName>
-                {data.createdAt}
-              </S.Post>
-            );
-          })}
-        </S.PostContainer>
-      </S.InfinityScrollContainer>
-    );
+  return (
+    <S.InfinityScrollContainer>
+      <S.RecruitmentRequest>채용의뢰</S.RecruitmentRequest>
+      <S.PostContainer>
+        {data.map((data: any) => {
+          return (
+            <S.Post>
+              <S.CompanyName>{data.name}</S.CompanyName>
+              {data.createdAt}
+            </S.Post>
+          );
+        })}
+      </S.PostContainer>
+    </S.InfinityScrollContainer>
+  );
 };
 
 export default InfiniteScroll;
