@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import * as S from "./styles";
+import * as S from "../styles/styles";
 import PageDataType from "../interface/PageDataTypes";
 import { request } from "../api/api";
 

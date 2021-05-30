@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { NavLink } from 'react-router-dom';
-
+import { NavLink } from "react-router-dom";
 
 export const Loading = styled.div`
   font-size: 150px;
@@ -29,7 +28,7 @@ export const NavBar = styled(NavLink)`
   text-decoration: none;
 `;
 
-export const ActiveStyle = {backgroundColor:"#009d00"}
+export const ActiveStyle = { backgroundColor: "#009d00" };
 
 //Infinity Scroll Styles
 
@@ -98,7 +97,7 @@ export const TableBar = styled.div`
   font-weight: 500;
   span {
     margin: auto 80px;
-  }  
+  }
 `;
 
 export const Table = styled.li`
@@ -116,7 +115,6 @@ export const Table = styled.li`
   div {
     margin: auto 85px;
   }
-  
 `;
 
 export const PageContainer = styled.div`
@@ -125,7 +123,7 @@ export const PageContainer = styled.div`
 `;
 
 export const Page = styled.li`
-  list-style: none; 
+  list-style: none;
   height: 25px;
   width: 30px;
   cursor: pointer;

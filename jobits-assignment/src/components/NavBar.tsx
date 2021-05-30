@@ -1,5 +1,4 @@
-import * as S from './styles';
-import { NavLink } from 'react-router-dom';
+import * as S from '../styles/styles';
 
 const NavBar = () => {
     return (

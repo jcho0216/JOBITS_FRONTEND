@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import * as S from "./styles";
+import * as S from "../styles/styles";
 import InfiniteDataTypes from "../interface/InfiniteDataTypes";
 import { request } from "../api/api";
 
