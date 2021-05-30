@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { NavLink } from 'react-router-dom';
 
 
 export const Loading = styled.div`
@@ -18,21 +19,19 @@ export const NavBarContainer = styled.div`
   position: fixed;
 `;
 
-export const NavBar = styled.div`
+export const NavBar = styled(NavLink)`
   height: 50px;
   color: white;
   cursor: pointer;
   display: flex;
-  div {
-    margin: 15px auto;
-  }
-  &:active {
-    background-color: #0f9f0e;
-  }
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
 `;
 
+export const ActiveStyle = {backgroundColor:"#009d00"}
+
 //Infinity Scroll Styles
-export const InfinityScrollContainer = styled.div``;
 
 export const RecruitmentRequest = styled.div`
   font-size: 20px;
@@ -65,13 +64,6 @@ export const CompanyName = styled.div`
 `;
 
 //Pagination Styles
-export const PageNationContainer = styled.div`
-  /* width: 100%;
-  height: 100vh;
-  background-color: #ffffff;
-  display: flex; */
-`;
-
 export const PageNation = styled.div`
   width: 80vw;
   height: 75vh;
@@ -106,9 +98,7 @@ export const TableBar = styled.div`
   font-weight: 500;
   span {
     margin: auto 80px;
-    /* justify-content: space-between; */
-  }
-  
+  }  
 `;
 
 export const Table = styled.li`
@@ -123,7 +113,7 @@ export const Table = styled.li`
   &:nth-child(odd) {
     background-color: #fbfbfb;
   }
-  span {
+  div {
     margin: auto 85px;
   }
   
@@ -157,4 +147,3 @@ export const Button = styled.div`
   border-radius: 10%;
   padding-top: 5px;
 `;
-

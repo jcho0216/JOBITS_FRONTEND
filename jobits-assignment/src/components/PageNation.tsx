@@ -1,14 +1,13 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import * as S from "./styles";
 import PageDataType from "../interface/PageDataTypes";
+import { request } from "../api/api";
 
 const PageNation = (): JSX.Element => {
   const [data, setData] = useState<PageDataType[]>([]);
-  // const [loading, setLoading] = useState<PageDataType | boolean>(false);
+  const [loading, setLoading] = useState<PageDataType | boolean>(false);
   const [maxPage, setMaxPage] = useState<PageDataType | number>(0);
   let [page, setPage] = useState<number>(1);
-  const [itemsPerPage, setItemsPerPage] = useState<number>(5);
 
   const pageLength = new Array(maxPage);
 
@@ -16,22 +15,16 @@ const PageNation = (): JSX.Element => {
     pageLength[i] = i + 1;
   }
 
-  const getData = async (page: PageDataType | number) => {
-    await axios
-      .get(`${process.env.REACT_APP_API_URL}/page?page=${page}`)
+  useEffect(() => {
+    request("GET", `/page?page=${page}`)
       .then((res) => {
-        setData(res.data.data);
-        setMaxPage(res.data.maxPage);
+        setData(res.data);
+        setMaxPage(res.maxPage);
       })
       .catch((error) => {
         console.log(error);
       });
-  };
-
-  useEffect(() => {
-    // setLoading(true)
-    getData(page);
-    // setLoading(false)
+    setLoading(false);
   }, [page]);
 
   const setPageNation = (e: any) => {
@@ -56,9 +49,9 @@ const PageNation = (): JSX.Element => {
     }
   };
 
-  // if(loading) return <S.Loading>Loading...</S.Loading>
+  if (loading) return <S.Loading>Loading...</S.Loading>;
   return (
-    <S.PageNationContainer>
+    <>
       <S.PageNation>
         <S.RecruitmentRequestPage>채용의뢰</S.RecruitmentRequestPage>
         <S.TableBar>
@@ -70,8 +63,8 @@ const PageNation = (): JSX.Element => {
             return (
               <>
                 <S.Table key={data.name}>
-                  <span>{data.name}</span>
-                  <span>{data.createdAt}</span>
+                  <div>{data.name}</div>
+                  <div>{data.createdAt}</div>
                 </S.Table>
               </>
             );
@@ -80,12 +73,23 @@ const PageNation = (): JSX.Element => {
       </S.PageNation>
       <S.PageContainer>
         <S.Button onClick={prevButton}>{"<"}</S.Button>
-        {pageLength.map((i) => {
-          return <S.Page onClick={setPageNation}>{i}</S.Page>;
+        {pageLength.map((value, index) => {
+          return (
+            <S.Page
+              style={
+                index === page - 1
+                  ? { backgroundColor: "#009d03", color: "white" }
+                  : { backgroundColor: "white" }
+              }
+              onClick={setPageNation}
+            >
+              {value}
+            </S.Page>
+          );
         })}
         <S.Button onClick={nextButton}>{">"}</S.Button>
       </S.PageContainer>
-    </S.PageNationContainer>
+    </>
   );
 };
 

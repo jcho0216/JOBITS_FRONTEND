@@ -4,24 +4,17 @@ import { NavLink } from 'react-router-dom';
 const NavBar = () => {
     return (
         <S.NavBarContainer>
-        <NavLink
+        <S.NavBar
           to="/pagenation"
-          style={{ textDecoration: "none", backgroundColor: "none" }}
-          activeClassName="active"
+          activeStyle={S.ActiveStyle}
         >
-          <S.NavBar>
-            <div>페이지 네이션</div>
+            페이지 네이션
           </S.NavBar>
-        </NavLink>
-        <NavLink
+          <S.NavBar 
           to="/infinitescroll"
-          style={{ textDecoration: "none", backgroundColor: "none" }}
-          activeClassName="active"
-        >
-          <S.NavBar>
-            <div>무한 스크롤</div>
+          activeStyle={S.ActiveStyle}>
+            무한 스크롤
           </S.NavBar>
-        </NavLink>
       </S.NavBarContainer>
     )
 }
